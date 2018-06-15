@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Place Board</title>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>番号</th>
+        <th>場所</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{student.number}}</td>
+	  {% if student.place == 0 %}
+	  <td>在室</td>
+	  {% elif student.place == 5 %}
+	  <td>教室</td>
+	  {% elif student.place == 10 %}
+	  <td>校内</td>
+	  {% elif student.place == 15 %}
+	  <td>自宅</td>
+	  {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

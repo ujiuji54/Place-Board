@@ -8,10 +8,6 @@
   <meta name="author" content="">
   
   <script type="text/javascript" >
-    function disp(){
-      pass = window.prompt("pass","");
-      location.href = "{% url "change" %}";
-    }
   </script>
 
   <title>N研 研究員現在地</title>
@@ -30,20 +26,20 @@
         {% for student in students %}
         <tr>
           <td>{{student.number}}</td>
-	  {% if student.place == 0 %}
-	  <td>在室</td>
-	  {% elif student.place == 5 %}
-	  <td>教室</td>
-	  {% elif student.place == 10 %}
-	  <td>校内</td>
-	  {% elif student.place == 15 %}
-	  <td>自宅</td>
-	  {% endif %}
 	  <td>
-	    <input type="button" value="変更" onClick="disp()">
+	    <p>
+	      <input type="radio" name="q1" value="在室">在室
+	      <input type="radio" name="q1" value="教室">教室
+	      <input type="radio" name="q1" value="校内">校内
+	      <input type="radio" name="q1" value="自宅">自宅
+	    </p>
 	  </td>
         </tr>
         {% endfor %}
+	<tr>
+	  <td></td>
+	  <td><input type="submit" value="更新"></td>
+	</tr>
     </tbody>
   </table>
 </body>

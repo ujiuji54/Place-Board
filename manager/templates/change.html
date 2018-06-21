@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='jp'>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,28 +8,6 @@
   <meta name="author" content="">
   
   <script type="text/javascript" >
-    function disp(){
-      {% for student in students %}
-      var value = document.getElementById("radio{{student.number}}").q1.value;
-      console.log(value);
-      switch(value){
-        case "在室":
-          place = 0;
-          break;
-        case "教室":
-          place = 5;
-          break;
-        case "校内":
-          place = 10;
-          break;
-        case "自宅":
-          place = 15;
-          break;
-      }
-      console.log(place);
-      {% end for %}
-      //location.href = "{% url "index" %}";
-    }
   </script>
 
   <title>N研 研究員現在地</title>
@@ -45,25 +23,26 @@
       </tr>
     </thead>
     <tbody>
-        {% for student in students %}
-        <tr>
-          <td>{{student.number}}</td>
-	  <td>
-	    <p>
-              <form id="radio{{student.number}}">
-	        <input type="radio" name="q1" value="在室">在室
-	        <input type="radio" name="q1" value="教室">教室
-	        <input type="radio" name="q1" value="校内">校内
-	        <input type="radio" name="q1" value="自宅">自宅
-              </form>
-	    </p>
-	  </td>
-        </tr>
-        {% endfor %}
-	<tr>
-	  <td></td>
-	  <td><input type="submit" value="更新" onClick ="disp()"></td>
-	</tr>
+      {% csrf_token %}
+      {% for form in formset %}
+      <tr>
+        <td>{{student.number}}</td>
+        <td>
+	  <p>
+            <form action="" method="post">
+              {% for radio in form.place %}
+                {{ radio.tag}}
+                <label>{{ radio.choice_label }}</label>
+              {% endfor %}
+            </form>
+	  </p>
+	</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td></td>
+        <td><input type="submit" value="更新"></td>
+      </tr>
     </tbody>
   </table>
 </body>

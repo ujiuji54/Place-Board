@@ -20,4 +20,4 @@ class RadioForm(forms.ModelForm):
             "place" : forms.RadioSelect,
         }
 
-RadioFormSet = formset_factory(RadioForm)
+RadioFormSet = formset_factory(RadioForm, extra=2)
